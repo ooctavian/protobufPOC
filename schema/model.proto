@@ -1,0 +1,23 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "protobufPOC/schema";
+
+message Author {
+  string first_name = 1;
+  string last_name = 2;
+}
+
+message Article {
+  string title = 1;
+  repeated Author authors = 2;
+  string content = 3;
+  optional bool draft = 4;
+  google.protobuf.Timestamp date_created = 5;
+  google.protobuf.Timestamp date_modefied = 6;
+}
+
+message Articles {
+  repeated Article articles = 1;
+}
+
