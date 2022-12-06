@@ -9,15 +9,17 @@ message Author {
 }
 
 message Article {
-  string title = 1;
-  repeated Author authors = 2;
-  string content = 3;
-  optional bool draft = 4;
-  google.protobuf.Timestamp date_created = 5;
-  google.protobuf.Timestamp date_modefied = 6;
+  uint32 id = 1;
+  string title = 2;
+  repeated Author authors = 3;
+  string content = 4;
+  repeated fixed32 categories = 5;
+  optional bool draft = 6;
+  google.protobuf.Timestamp date_created = 7;
+  google.protobuf.Timestamp date_modefied = 8;
 }
 
 message Articles {
-  repeated Article articles = 1;
+  repeated Article data = 1;
 }
 
