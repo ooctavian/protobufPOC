@@ -9,10 +9,11 @@ import (
 )
 
 var (
-	boolTrue  = true
-	boolFalse = false
-
-	articles = &schema.Articles{
+	Draft     = schema.State_Draft
+	Published = schema.State_Published
+	Hidden    = schema.State_Hidden
+	Removed   = schema.State_Removed
+	articles  = &schema.Articles{
 		Data: []*schema.Article{
 			{
 				Id:    1,
@@ -31,7 +32,7 @@ var (
 					uint32(3),
 					uint32(6),
 				},
-				Draft:        &boolTrue,
+				State:        &Draft,
 				DateCreated:  timestamppb.New(time.Now()),
 				DateModefied: timestamppb.Now(),
 			},
@@ -49,7 +50,7 @@ var (
 					},
 				},
 				Content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-				Draft:   &boolFalse,
+				State:   &Removed,
 				Categories: []uint32{
 					uint32(3),
 					uint32(2),
@@ -72,7 +73,7 @@ var (
 					uint32(2),
 				},
 				Content:      "PHP is a simple yet powerful open-source scripting language for creating dynamic web content. The millions of web sites powered by PHP are testament to its popularity and ease of use",
-				Draft:        &boolTrue,
+				State:        &Published,
 				DateCreated:  timestamppb.New(time.Now()),
 				DateModefied: timestamppb.Now(),
 			},
@@ -89,7 +90,7 @@ var (
 					uint32(3),
 				},
 				Content:      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-				Draft:        &boolFalse,
+				State:        &Hidden,
 				DateCreated:  timestamppb.New(time.Now()),
 				DateModefied: timestamppb.Now(),
 			},

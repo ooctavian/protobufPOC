@@ -48,7 +48,7 @@ func handleJson(w http.ResponseWriter) {
 
 func articleHandler(w http.ResponseWriter, req *http.Request) {
 	if req.Method == http.MethodGet {
-		switch req.Header.Get("Content-Type") {
+		switch req.Header.Get("Accept") {
 		case "application/x-protobuf":
 			handleProtobuf(w)
 		case "application/xml":
