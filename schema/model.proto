@@ -27,7 +27,7 @@ message Article {
   string title = 2;
   repeated Author authors = 3;
   string content = 4;
-  repeated fixed32 categories = 5;
+  repeated uint32 categories = 5;
   // if optional rule is used it compiles to a pointer not a literal
   optional State state = 6;
   google.protobuf.Timestamp date_created = 7;
