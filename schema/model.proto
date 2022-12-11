@@ -1,8 +1,13 @@
+// protobuf version we are using
 syntax = "proto3";
+
+// importing package with timestamp type
 import "google/protobuf/timestamp.proto";
 
+// golang package it would be compiled to
 option go_package = "protobufPOC/schema";
 
+// state of an article
 enum State {
   Draft = 0;
   Published = 1;
@@ -10,17 +15,20 @@ enum State {
   Removed = 4;
 }
 
+// Author of article
 message Author {
   string first_name = 1;
   string last_name = 2;
 }
 
+// Info about article
 message Article {
   uint32 id = 1;
   string title = 2;
   repeated Author authors = 3;
   string content = 4;
   repeated fixed32 categories = 5;
+  // if optional rule is used it compiles to a pointer not a literal
   optional State state = 6;
   google.protobuf.Timestamp date_created = 7;
   google.protobuf.Timestamp date_modefied = 8;

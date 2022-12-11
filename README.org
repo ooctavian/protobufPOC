@@ -1,0 +1,117 @@
+#+title: Protobuf
+#+OPTIONS: timestamp:nil toc:nil num:nil
+:REVEAL_PROPERTIES:
+#+REVEAL_MAX_SCALE: 1.0
+#+REVEAL_MIN_SCALE: 0.2
+#+REVEAL_MARGIN: 0.04
+#+REVEAL_TRANS: slide
+#+REVEAL_THEME: serif
+:END:
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style.css" />
+
+* Data serialization and deserialization
+
+[[https://miro.medium.com/max/1370/1*AUkV8-lhBGTkvpFj_07OUw.png]]
+
+* Serialization formats
+
+| **CSV**              | Comma Separated Values. Textual.                                               |
+| **JSON**             | Lightweight document data-interchange format. Textual.                         |
+| **Protocol Buffers** | Google's data interchange format. Binary.                                      |
+| **Message Pack**     | Efficient JSON-like binary serialization format. Binary.                       |
+| **YAML**             | Identation based data serialization standard. Textual.                         |
+| **TOML**             | Tom's Obvious, Minimal Language. Textual.                                      |
+
+* JSON
+#+begin_src json
+{
+    "employee": {
+        "name":       "sonoo",
+        "salary":      56000,
+        "married":     true
+    }
+}
+#+end_src
+    
+* Benefits
+#+ATTR_REVEAL: :frag (appear)
+- Readable
+- Self contained
+- Easy extensible ?
+
+* Types?
+#+begin_src json
+{
+    "value": 87
+}
+#+end_src
+
+* ??
+[[https://media.geeksforgeeks.org/wp-content/uploads/20191118111217/Golang-Integers.png]]
+
+* JSON types
+- string
+- number
+- object (JSON object)
+- array
+- boolean
+- null
+
+* Data size
+[[./json.png]]
+* Protobuf
+Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data.
+
+* How protobuf works ?
+
+[[https://www.xenonstack.com/hubfs/google-protocol-buffers-xenonstack.png]]
+** Protobuf schema
+[[./protobuf_schema.png]]
+** Protobuf uses binary message format
+[[https://martin.kleppmann.com/2012/12/protobuf.png]]
+** that has no field names
+** Protobuf types
+
+#+ATTR_REVEAL: :frag (appear)
+- =double=, =float=
+- =int32=, =int64=, =uint32=, =uint64=, =sint32=, =sint64=
+- =fixed32=, =fixed64=, =sfixed32=, =sfixed64=
+- =bool=
+- =string=
+- =bytes=
+- =array=, =enum=, =hashmap=
+
+
+** How sint32/64 encoding work ?
+
+#+ATTR_HTML: :width 100% :height 90%
+[[./ZigZag.png]]
+
+** protoc - the protobuf compiler
+- generates language specific code that codes and decodes data based on .proto files
+
+*** Installation
+#+begin_src shell
+apt install -y protobuf-compiler # debian/ubuntu
+brew install protobuf # mac
+go install google.golang.org/protobuf/cmd/protoc-gen-go@latest # for golang support
+#+end_src
+* Protobuf advantages
+#+ATTR_REVEAL: :frag (appear)
+- Schema
+- Backward compatibility
+- Fast parsing
+- Compact data storage
+- Language interoperability
+- Optimized functionality through automatically-generated classes.
+** When to use it ?
+#+ATTR_REVEAL: :frag (appear)
+- Performance matters
+- High volumes
+- Similar messages
+* References
+- [[https://github.com/maximveksler/awesome-serialization]]
+- [[https://docs.progress.com/en-US/bundle/openedge-abl-use-json-117/page/Benefits-of-JSON.html]]
+- [[https://www.educative.io/answers/what-is-the-difference-between-protocol-buffers-and-json]]
+- [[https://www.youtube.com/watch?v=uGYZn6xk-hA]]
+- [[https://developers.google.com/protocol-buffers/docs/overview]]
