@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Protocol buffers</title>
+  <meta name="author" content="Octavian">
+  <style type="text/css">
+  .underline { text-decoration: underline; }
+  </style>
+  <link rel="stylesheet" href=
+  "https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href=
+  "https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/serif.css" id=
+  "theme">
+  <link rel="stylesheet" type="text/css" href="./assets/style.css">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section id="sec-title-slide">
+        <h1 class="title">Protocol buffers</h1>
+      </section>
+      <section>
+        <section id="slide-orgb5bcfea">
+          <h2 id="orgb5bcfea">Data serialization and
+          deserialization</h2>
+          <div id="orgb18f071" class="figure">
+            <p><img src=
+            "https://miro.medium.com/max/1370/1*AUkV8-lhBGTkvpFj_07OUw.png"
+            alt="1*AUkV8-lhBGTkvpFj_07OUw.png"></p>
+          </div>
+        </section>
+      </section>
+      <section>
+        <section id="slide-org120482f">
+          <h2 id="org120482f">Serialization formats</h2>
+          <table border="2" cellspacing="0" cellpadding="6" rules=
+          "groups" frame="hsides">
+            <colgroup>
+              <col class="org-left">
+              <col class="org-left">
+            </colgroup>
+            <tbody>
+              <tr>
+                <td class="org-left"><b>CSV</b></td>
+                <td class="org-left">Comma Separated Values.
+                Textual.</td>
+              </tr>
+              <tr>
+                <td class="org-left"><b>JSON</b></td>
+                <td class="org-left">Lightweight document
+                data-interchange format. Textual.</td>
+              </tr>
+              <tr>
+                <td class="org-left"><b>Protocol Buffers</b></td>
+                <td class="org-left">Google’s data interchange
+                format. Binary.</td>
+              </tr>
+              <tr>
+                <td class="org-left"><b>Message Pack</b></td>
+                <td class="org-left">Efficient JSON-like binary
+                serialization format. Binary.</td>
+              </tr>
+              <tr>
+                <td class="org-left"><b>YAML</b></td>
+                <td class="org-left">Identation based data
+                serialization standard. Textual.</td>
+              </tr>
+              <tr>
+                <td class="org-left"><b>TOML</b></td>
+                <td class="org-left">Tom’s Obvious, Minimal
+                Language. Textual.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+      <section>
+        <section id="slide-orgdff3410">
+          <h2 id="orgdff3410">JSON</h2>
+          <div class="org-src-container">
+            <pre class="src src-json"><span style=
+            "color: #d4d4d4; background-color: #1e1e1e;">{</span>
+    <span style="color: #339CDB;">"employee"</span>: <span style=
+"color: #d4d4d4; background-color: #1e1e1e;">{</span>
+        <span style=
+"color: #339CDB;">"name"</span>:       <span style=
+"color: #DB8E73;">"sonoo"</span>,
+        <span style=
+"color: #339CDB;">"salary"</span>:      <span style=
+"color: #339CDB;">56000</span>,
+        <span style=
+"color: #339CDB;">"married"</span>:     <span style=
+"color: #339CDB;">true</span>
+    <span style=
+"color: #d4d4d4; background-color: #1e1e1e;">}</span>
+<span style="color: #d4d4d4; background-color: #1e1e1e;">}</span>
+</pre>
+          </div>
+        </section>
+      </section>
+      <section>
+        <section id="slide-org75567a7">
+          <h2 id="org75567a7">Benefits</h2>
+          <ul>
+            <li class="fragment appear">Readable</li>
+            <li class="fragment appear">Self contained</li>
+            <li class="fragment appear">Easy extensible ?</li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section id="slide-org981e206">
+          <h2 id="org981e206">Types?</h2>
+          <div class="org-src-container">
+            <pre class="src src-json"><span style=
+            "color: #d4d4d4; background-color: #1e1e1e;">{</span>
+    <span style="color: #339CDB;">"value"</span>: <span style=
+"color: #339CDB;">87</span>
+<span style="color: #d4d4d4; background-color: #1e1e1e;">}</span>
+</pre>
+          </div>
+        </section>
+        <section id="slide-orgb580564">
+          <h3 id="orgb580564">??</h3>
+          <div id="orgdc58dd2" class="figure">
+            <p><img src=
+            "https://media.geeksforgeeks.org/wp-content/uploads/20191118111217/Golang-Integers.png"
+            alt="Golang-Integers.png"></p>
+          </div>
+        </section>
+      </section>
+      <section>
+        <section id="slide-orgb940ffa">
+          <h2 id="orgb940ffa">JSON types</h2>
+          <ul>
+            <li>string</li>
+            <li>number</li>
+            <li>object (JSON object)</li>
+            <li>array</li>
+            <li>boolean</li>
+            <li>null</li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section id="slide-org9b0b8bf">
+          <h2 id="org9b0b8bf">Data size</h2>
+          <div id="orgf8b65bc" class="figure">
+            <p><img src="./assets/json.png" alt="json.png"></p>
+          </div>
+        </section>
+      </section>
+      <section>
+        <section id="slide-org9b6c712">
+          <h2 id="org9b6c712">Protobuf</h2>
+          <p>Protocol buffers are a language-neutral,
+          platform-neutral extensible mechanism for serializing
+          structured data.</p>
+        </section>
+      </section>
+      <section>
+        <section id="slide-org97c0026">
+          <h2 id="org97c0026">How protobuf works ?</h2>
+          <div id="org446d88f" class="figure">
+            <p><img src=
+            "https://www.xenonstack.com/hubfs/google-protocol-buffers-xenonstack.png"
+            alt="google-protocol-buffers-xenonstack.png"></p>
+          </div>
+        </section>
+        <section id="slide-orge6ea78d">
+          <h3 id="orge6ea78d">Protobuf schema</h3>
+          <div id="org730ade5" class="figure">
+            <p><img src="./assets/protobuf_schema.png" alt=
+            "protobuf_schema.png"></p>
+          </div>
+        </section>
+        <section id="slide-org0e97c92">
+          <h3 id="org0e97c92">Protobuf uses binary message
+          format</h3>
+          <div id="org18f5119" class="figure">
+            <p><img src=
+            "https://martin.kleppmann.com/2012/12/protobuf.png"
+            alt="protobuf.png"></p>
+          </div>
+        </section>
+        <section id="slide-org35c41d0">
+          <h3 id="org35c41d0">that has no field names</h3>
+        </section>
+        <section id="slide-orgfcd32ef">
+          <h3 id="orgfcd32ef">Protobuf types</h3>
+          <ul>
+            <li class="fragment appear"><code>double</code>,
+            <code>float</code></li>
+            <li class="fragment appear"><code>int32</code>,
+            <code>int64</code>, <code>uint32</code>,
+            <code>uint64</code>, <code>sint32</code>,
+            <code>sint64</code></li>
+            <li class="fragment appear"><code>fixed32</code>,
+            <code>fixed64</code>, <code>sfixed32</code>,
+            <code>sfixed64</code></li>
+            <li class="fragment appear"><code>bool</code></li>
+            <li class="fragment appear"><code>string</code></li>
+            <li class="fragment appear"><code>bytes</code></li>
+            <li class="fragment appear"><code>array</code>,
+            <code>enum</code>, <code>hashmap</code></li>
+          </ul>
+        </section>
+        <section id="slide-org9b5a53d">
+          <h3 id="org9b5a53d">How sint32/64 encoding work ?</h3>
+          <div id="orgd5f1fc8" class="figure">
+            <p><img src="./assets/ZigZag.png" alt="ZigZag.png"
+            width="100%" height="90%"></p>
+          </div>
+        </section>
+        <section id="slide-orgfc66843">
+          <h3 id="orgfc66843">protoc - the protobuf compiler</h3>
+          <ul>
+            <li>generates language specific code that codes and
+            decodes data based on .proto files</li>
+          </ul>
+        </section>
+        <section id="slide-orga9fa6a9">
+          <h4 id="orga9fa6a9">Installation</h4>
+          <div class="org-src-container">
+            <pre class="src src-shell"><span style=
+            "color: #237AD3; font-weight: bold;">apt</span> install <span style="color: #339CDB;">-y</span> protobuf-compiler <span style="color: #579C4C;"># debian/ubuntu</span>
+<span style=
+"color: #237AD3; font-weight: bold;">brew</span> install protobuf <span style="color: #579C4C;"># mac</span>
+<span style=
+"color: #237AD3; font-weight: bold;">go</span> install google.golang.org/protobuf/cmd/protoc-gen-go@latest <span style="color: #579C4C;"># for golang support</span>
+</pre>
+          </div>
+        </section>
+      </section>
+      <section>
+        <section id="slide-org142cf39">
+          <h2 id="org142cf39">Protobuf advantages</h2>
+          <ul>
+            <li class="fragment appear">Schema</li>
+            <li class="fragment appear">Fast parsing</li>
+            <li class="fragment appear">Compact data storage</li>
+            <li class="fragment appear">Language
+            interoperability</li>
+            <li class="fragment appear">Optimized functionality
+            through automatically-generated classes.</li>
+            <li class="fragment appear">Backward compatibility</li>
+          </ul>
+        </section>
+        <section id="slide-org6094ec5">
+          <h3 id="org6094ec5">Using proto2 Message Types in
+          proto3</h3>
+          <p>It’s possible to import proto2 message types and use
+          them in your proto3 messages, and vice versa. However,
+          proto2 enums cannot be used directly in proto3 syntax
+          (it’s okay if an imported proto2 message uses them).</p>
+        </section>
+        <section id="slide-orgb6899e2">
+          <h3 id="orgb6899e2">When to use it ?</h3>
+          <ul>
+            <li class="fragment appear">Performance matters</li>
+            <li class="fragment appear">High volumes</li>
+            <li class="fragment appear">Similar messages <a href=
+            "https://developers.google.com/protocol-buffers/docs/reference/go-generated#oneof">
+              https://developers.google.com/protocol-buffers/docs/reference/go-generated#oneof</a>
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section id="slide-orgd46cacb">
+          <h2 id="orgd46cacb">References</h2>
+          <ul>
+            <li>
+              <a href=
+              "https://github.com/maximveksler/awesome-serialization">
+              https://github.com/maximveksler/awesome-serialization</a>
+            </li>
+            <li>
+              <a href=
+              "https://docs.progress.com/en-US/bundle/openedge-abl-use-json-117/page/Benefits-of-JSON.html">
+              https://docs.progress.com/en-US/bundle/openedge-abl-use-json-117/page/Benefits-of-JSON.html</a>
+            </li>
+            <li>
+              <a href=
+              "https://www.educative.io/answers/what-is-the-difference-between-protocol-buffers-and-json">
+              https://www.educative.io/answers/what-is-the-difference-between-protocol-buffers-and-json</a>
+            </li>
+            <li>
+              <a href=
+              "https://www.youtube.com/watch?v=uGYZn6xk-hA">https://www.youtube.com/watch?v=uGYZn6xk-hA</a>
+            </li>
+            <li>
+              <a href=
+              "https://developers.google.com/protocol-buffers/docs/overview">
+              https://developers.google.com/protocol-buffers/docs/overview</a>
+            </li>
+          </ul>
+        </section>
+      </section>
+    </div>
+  </div>
+  <script src=
+  "https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+  
+  <script src=
+  "https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js"></script>
+  
+  <script src=
+  "https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js"></script>
+  
+  <script src=
+  "https://cdn.jsdelivr.net/npm/reveal.js/plugin/search/search.js"></script>
+  
+  <script src=
+  "https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom/zoom.js"></script>
+  
+  <script>
+
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+
+  controls: true,
+  progress: true,
+  history: false,
+  center: true,
+  slideNumber: 'c',
+  rollingLinks: false,
+  keyboard: true,
+  mouseWheel: false,
+  fragmentInURL: false,
+  hashOneBasedIndex: false,
+  pdfSeparateFragments: true,
+  overview: true,
+  margin: 0.04,
+  minScale: 0.20,
+  maxScale: 1.00,
+
+  transition: 'slide',
+  transitionSpeed: 'default',
+
+  // Plugins with reveal.js 4.x
+  plugins: [ RevealMarkdown, RevealNotes, RevealSearch, RevealZoom ],
+
+  // Optional libraries used to extend reveal.js
+  dependencies: [
+  ]
+
+  });
+  </script>
+</body>
+</html>
