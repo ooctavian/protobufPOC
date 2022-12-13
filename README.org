@@ -1,5 +1,6 @@
-#+title: Protobuf
-#+OPTIONS: timestamp:nil toc:nil num:nil
+#+title: Protocol buffers
+#+subtitle: Making data serialization more efficient
+#+OPTIONS: timestamp:nil toc:nil num:nil author:nil
 :REVEAL_PROPERTIES:
 #+REVEAL_MAX_SCALE: 1.0
 #+REVEAL_MIN_SCALE: 0.2
@@ -7,7 +8,7 @@
 #+REVEAL_TRANS: slide
 #+REVEAL_THEME: serif
 :END:
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style.css" />
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="./assets/style.css" />
 
 * Data serialization and deserialization
 
@@ -46,7 +47,7 @@
 }
 #+end_src
 
-* ??
+** ??
 [[https://media.geeksforgeeks.org/wp-content/uploads/20191118111217/Golang-Integers.png]]
 
 * JSON types
@@ -58,7 +59,7 @@
 - null
 
 * Data size
-[[./json.png]]
+[[./assets/json.png]]
 * Protobuf
 Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data.
 
@@ -66,7 +67,7 @@ Protocol buffers are a language-neutral, platform-neutral extensible mechanism f
 
 [[https://www.xenonstack.com/hubfs/google-protocol-buffers-xenonstack.png]]
 ** Protobuf schema
-[[./protobuf_schema.png]]
+[[./assets/protobuf_schema.png]]
 ** Protobuf uses binary message format
 [[https://martin.kleppmann.com/2012/12/protobuf.png]]
 ** that has no field names
@@ -85,7 +86,9 @@ Protocol buffers are a language-neutral, platform-neutral extensible mechanism f
 ** How sint32/64 encoding work ?
 
 #+ATTR_HTML: :width 100% :height 90%
-[[./ZigZag.png]]
+[[./assets/ZigZag.png]]
+
+
 
 ** protoc - the protobuf compiler
 - generates language specific code that codes and decodes data based on .proto files
@@ -99,16 +102,22 @@ go install google.golang.org/protobuf/cmd/protoc-gen-go@latest # for golang supp
 * Protobuf advantages
 #+ATTR_REVEAL: :frag (appear)
 - Schema
-- Backward compatibility
 - Fast parsing
 - Compact data storage
 - Language interoperability
 - Optimized functionality through automatically-generated classes.
+- Backward compatibility
+
+** Using proto2 Message Types in proto3
+It's possible to import proto2 message types and use them in your proto3 messages, and vice versa. However, proto2 enums cannot be used directly in proto3 syntax (it's okay if an imported proto2 message uses them).
+
+
 ** When to use it ?
 #+ATTR_REVEAL: :frag (appear)
 - Performance matters
 - High volumes
 - Similar messages
+  [[https://developers.google.com/protocol-buffers/docs/reference/go-generated#oneof]]
 * References
 - [[https://github.com/maximveksler/awesome-serialization]]
 - [[https://docs.progress.com/en-US/bundle/openedge-abl-use-json-117/page/Benefits-of-JSON.html]]

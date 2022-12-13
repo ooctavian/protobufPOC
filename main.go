@@ -93,6 +93,7 @@ func articleHandler(w http.ResponseWriter, req *http.Request) {
 		default:
 			postHandleJSON(body)
 		}
+		return
 	}
 }
 
